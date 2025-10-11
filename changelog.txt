@@ -1,0 +1,8 @@
+path_maker v0.3.0
+
+-Added a parameter 'check_existence' to path_maker.make_path (values : True or False, default to True) for check if the built path exists
+- Modified few parameters documentation
+- Added a parameter 'type' to path_maker.make_path (optionnal, str, ['img'], default = "")
+- logger_dialoger now create a file at '/data/path_maker/logs' for report not found file (also create the folder and them parents)
+- path_maker.make_path now return False if the path is not found and 'type' parameter not recognized
+- now, the user must call path_maker.make_path for make a path
