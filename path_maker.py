@@ -1,6 +1,9 @@
 import os
-from . import logger_dialoger
+import logging
+from .core import build_path
 from . import image_path
+
+logger = logging.basicConfig()
 
 def make_path(src_dir: str, target_path: str, type: str = "", check_existence: bool = True) -> str | bool:
     
@@ -8,10 +11,9 @@ def make_path(src_dir: str, target_path: str, type: str = "", check_existence: b
     Make a path and return it if it exsist
 
     Args:
-        src_dir (str): the variable __file__ of the file wich need the path
-        target_path (str): the name of the target path
-        type (str): the category of the file ("img"->image). default to ""
-        resuest_src (str): the source of the request ('internal' if the caller is not in package, else 'external')
+        - src_dir (str): the value __file__ of the file which call the function
+        - target_path (str): a relative path to the target path
+        - type (str): the category of the file ("img"->image). default to ""
     
     Returns (case 'check_existence = True')
         str: the built path
@@ -20,11 +22,8 @@ def make_path(src_dir: str, target_path: str, type: str = "", check_existence: b
     Returns (case 'check_existence = False'):
         str: the built path
         """
-
-    base_path = os.path.dirname(src_dir)
-    target_path = os.path.join(base_path, target_path)
-    path = os.path.abspath(target_path)
-
+    path = build_path(src_dir, target_path)
+    
     path_returners = {
         "img":image_path.return_path,
     }
@@ -45,7 +44,6 @@ def make_path(src_dir: str, target_path: str, type: str = "", check_existence: b
     else:
 
         if path_found == False:
-            logger_dialoger.logging(path)
             return False
         
         else:

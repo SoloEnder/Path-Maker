@@ -1,6 +1,7 @@
 
 import os
-from .logger_dialoger import logging
+import logging
+from .core import build_path
 
 def return_path(path: str, found: bool) -> str:
     """
@@ -19,7 +20,6 @@ def return_path(path: str, found: bool) -> str:
     
     else:
         from .path_maker import make_path
-        logging(path, "img")
-        failed_load_img = make_path(__file__, "image_load_failed.png")
+        failed_load_img = build_path(__file__, "image_load_failed.png")
         return failed_load_img
     
